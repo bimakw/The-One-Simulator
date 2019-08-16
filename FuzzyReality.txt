@@ -1,0 +1,186 @@
+#@author Gregorius Bima, Sanata Dharma University
+
+#Scenario information
+#Scenario.name =  Sassy-%%DecisionEngineRouterImproved.decisionEngine%%-[wait Time = %%Group1.waitTime%%]-[Message Interval = %%Events2.interval%%]-[message size = %%Events2.size%%]-[Node = %%Group.nrofHosts%%, Buffer Size = %%Group.bufferSize%%-[TTL = %%Group.msgTtl%%]-M-S-15Min
+Scenario.name =  HaggleInfocom5-v2-%%DecisionEngineRouter.decisionEngine%%-[wait Time = %%Group1.waitTime%%]-[Message Interval = %%Events2.interval%%]-[message size = %%Events2.size%%]-[Node = %%Group.nrofHosts%%, Buffer Size = %%Group.bufferSize%%-[TTL = %%Group.msgTtl%%]-M-S-15Min
+#Scenario.name =  Node %%Report.contactDurationToNodeID%% -
+#Scenario.name =  Reality-%%DecisionEngineRouterImproved.decisionEngine%%-[wait Time = %%Group1.waitTime%%]-[Random = %%MovementModel.rngSeed%%]-[Message Interval = %%Events2.interval%%]-[message size = %%Events2.size%%]-[Node = %%Group.nrofHosts%%, Buffer Size = %%Group.bufferSize%%-[TTL = %%Group.msgTtl%%]-M-S-15Min
+#Scenario.name =  Reality-%%DecisionEngineRouter.decisionEngine%%-[wait Time = %%Group1.waitTime%%]-[Message Interval = %%Events2.interval%%]-[message size = %%Events2.size%%]-[Node = %%Group.nrofHosts%%, Buffer Size = %%Group.bufferSize%%-[TTL = %%Group.msgTtl%%]-M-S-15Min
+Scenario.simulateConnections = false
+Scenario.updateInterval = 1
+
+Scenario.endTime = 274883
+
+#987529 Haggle Cam
+#274883 Haggle 3 infocom 5
+#342915 Infocom6
+#16981816 Reality 8490908‬
+#6413284 Sassy
+
+Report.warmup = 1
+Scenario.nrofHostGroups = 1
+
+#Interfaces informations
+btInterface.type = SimpleBroadcastInterface
+btInterface.transmitSpeed = 250k
+btInterface.transmitRange = 10
+btInterface.scanInterval = 120
+
+#Group Information
+## Buffer Size : 200 messages of 10 K ~ 2M
+Group.bufferSize = 20M
+
+## Router
+
+#Group.router = DecisionEngineRouterImproved
+Group.router = DecisionEngineRouter
+#DecisionEngineRouter.decisionEngine = fuzzy.TesterRouter
+DecisionEngineRouter.decisionEngine = fuzzy.FuzzyRouter
+#DecisionEngineRouter.decisionEngine = decisionengine.ProphetRouter
+#DecisionEngineRouter.decisionEngine = epidemic.EpidemicRouter
+#DecisionEngineRouterImproved.decisionEngine = fuzzy.FuzzyRouterImproved
+DecisionEngineRouter.fcl = fuzzycontrollanguage/haggle3Infocom5.fcl
+#DecisionEngineRouterImproved.fcl = fuzzycontrollanguage/reality.fcl
+
+# FCL for routing scheme
+# haggle3Infocom5.fcl
+# reality.fcl
+
+## TTL 24 hours=1440, 3 days= 4320 1 week= 10080, 2 week = 20160, 3 weeks= 30240 1 month = 43800 , 6,5 month = 283029,95649702
+Group.msgTtl = 4320
+#1440 Haggle Cam
+#4320 Haggle 3 infocom 5
+#10080 Reality 20160
+#360 Infocom6
+#4320 Sassy
+
+Group.nrofInterfaces = 1
+Group.interface1 = btInterface
+
+#Group1 Information
+Group1.groupID = A
+#Group1.waitTime = 0, 120
+#Group1.waitTime = 0, 87600
+Group1.waitTime = 0, 43800
+#Group1.waitTime = 0, 23586
+Group1.speed = 0.5, 1.5
+Group1.nrofHosts = 41
+#36 Haggle Cam
+#41 Haggle
+#97 Reality
+#98 Infocom6
+#25 Sassy
+Group1.nodeLocation = 10, 10
+Group1.movementModel = StationaryMovement
+
+
+#How many event generator
+Events.nrof = 2
+
+## Trace information
+Events1.class = ExternalEventsQueue
+Events1.filePath = scenario/Haggle3-Infocom5.csv
+Events1.select = Haggle3-Infocom5
+#Haggle4-Cam-Imote.csv
+#Haggle3-Infocom5.csv
+#Haggle6-infocom6.csv
+#RealityConnectionTraceFinal.txt
+#sassy.csv
+
+## Message creation parameters
+Events2.class = MessageEventGenerator
+#Events2.interval = 25,35
+Events2.interval = 1160, 1240
+#imote3-infocom5 200
+#lainnya 500,600
+
+#97, 103
+# 25,30 (~120 texts/hour)
+# 290, 310 (~12 texts/hour)
+# 580, 620 (~ 6 texts/hour)
+# 1160, 1240 (~ 3 texts/ hour)
+# 2320, 2480 (~ 1 texts/ hour)
+
+Events2.size = 10k
+#Haggle Cam 100k, 250k
+#Haggle 3 infocom 5 250k, 300k
+#Reality 20k
+#Infocom6 350k , 400k
+#Sassy 500k
+
+## range of message source/destination address
+Events2.hosts = 0, 40
+# 0, 35 Haggle Cam
+# 0, 40 Haggle 3 infocom 5
+# 0, 96 Reality
+# 0, 97 Infocom6
+# 0, 24 Sassy
+Events2.prefix = M
+
+Events2.time = 0, 253283
+#987529 Haggle Cam 901129
+#274883 Haggle 3 infocom 5 253283
+#16981816 Reality 16377016 15772216
+#342915 Infocom6 321315
+#6413284 Sassy 6154084
+
+# World's size for Movement Models without implicit size (width, height; meters)
+MovementModel.worldSize = 100, 100
+
+# seed for movement models' pseudo random number generator (default = 0)
+#MovementModel.rngSeed = 0
+MovementModel.rngSeed = 1
+#MovementModel.rngSeed = [2; 8372; 98092; 18293; 777]
+#MovementModel.rngSeed = [1;1;1;1;1;99;99;99;99;99;344;344;344;344;344;986;986;986;986;986;631;631;631;631;631]
+#MovementModel.rngSeed = [1;99;344;986;631]
+
+
+#ReportsInformations
+Report.nrofReports = 6
+
+#Report.reportDir = reports/Ofline/reality/
+#Report.reportDir = reports/Ofline/haggle3/
+#Report.reportDir = reports/Ofline/sassy/
+#Report.reportDir = reports/FuzzyEncounterRouter/Reality/TestPerfomance/
+Report.reportDir = reports/FuzzyEncounterRouter/HaggleInfocom/
+#Report.reportDir = reports/FuzzyEncounterRouter/Sassy/
+#Report.reportDir = reports/EpidemicRouter/Reality/tes/
+#Report.reportDir = reports/EpidemicRouter/HaggleInfocom/
+#Report.reportDir = reports/EpidemicRouter/Sassy/
+#Report.reportDir = reports/Prophet/Reality/
+#Report.reportDir = reports/Prophet/HaggleInfocom/
+#Report.reportDir = reports/Prophet/Sassy/
+
+#Report.report1 = ContactDurationReport
+#Report.contactDurationToNodeID = [0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90;91;92;93;94;95;96]
+#[0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90;91;92;93;94;95;96]
+#Report.report2 = IntercontactDurationReport
+#Report.intercontactToNodeID = [0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32;33;34;35;36;37;38;39;40;41;42;43;44;45;46;47;48;49;50;51;52;53;54;55;56;57;58;59;60;61;62;63;64;65;66;67;68;69;70;71;72;73;74;75;76;77;78;79;80;81;82;83;84;85;86;87;88;89;90;91;92;93;94;95;96]
+#Report.report1 = MessageStatsReport
+Report.report1 = PercentageMessageDeliveredPerContactReport
+Report.report2 = MessageDeliveredPerContactReport
+Report.report3 = OverheadPerContactReport
+Report.report4 = LatencyPerContactReport
+Report.report5 = MessageStatsReport
+Report.report6 = MessageReceivedReport
+
+#Report classes to load
+#MessageStatsReport
+#MessageDeliveredperContactReport
+#BufferOccupancyReport
+#BufferOccupancyPerHourReport
+#BufferOccupancyPerTime
+#DefuzzificationPerNodeReport
+#BufferOccupancyPerDayReport
+#DeliveredMessagesReport
+#BufferOverflowReport
+#DeliveryCentralityReport
+#FamilySetDetectionReport
+#MessageStatsReport
+#MessageReceivedReport
+#UniqueEncountersReport
+#TotalEncountersReport
+#BufferOccupancyEWMAReport
+#DegreeCentralityReport
+#CommunityDetectionReport
+
