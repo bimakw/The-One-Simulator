@@ -1,5 +1,5 @@
 FUNCTION_BLOCK haggle3Infocom5	// Block definition (there may be more than one block per file)
- 
+  
 VAR_INPUT				// Define input variables
 	Contact_Duration : REAL;
 	Intercontact_Duration : REAL;
