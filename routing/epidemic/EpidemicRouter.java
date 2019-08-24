@@ -66,7 +66,7 @@ public class EpidemicRouter implements RoutingDecisionEngine {
         return false;
     }
 
-    private EpidemicRouter getOtherFuzzyRouter(DTNHost host) {
+    private EpidemicRouter getOtherEpidemicRouter(DTNHost host) {
         MessageRouter otherRouter = host.getRouter();
         assert otherRouter instanceof DecisionEngineRouter : "This router only works "
                 + " with other routers of same type";
