@@ -17,7 +17,8 @@ import core.MessageListener;
 import core.Settings;
 
 /**
- *
+ * Show the total of message delivered
+ * in the simulation per total contact
  * @author by Gregorius Bima, Sanata Dharma University
  */
 public class MessageDeliveredPerContactReport extends Report implements MessageListener, ConnectionListener {
