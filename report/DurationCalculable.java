@@ -18,10 +18,14 @@ import java.util.Map;
 public interface DurationCalculable {
     
     /**
-     * Get
-     * @return 
+     * Get the summary vector of contact duration from node's contact history
+     * @return Contact duration summary vector
      */
     public Map<DTNHost, List<Duration>> getEncounterHistory();
+    /**
+     * Get the summary vector of inter-contact duration from node's contact history
+     * @return Inter-contact duration summary vector
+     */
     public Map<DTNHost, List<Duration>> getIntercontactHistory();
     
 }
